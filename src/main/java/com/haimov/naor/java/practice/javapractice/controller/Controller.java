@@ -3,12 +3,9 @@ package com.haimov.naor.java.practice.javapractice.controller;
 import com.haimov.naor.java.practice.javapractice.dao.UserRepository;
 import com.haimov.naor.java.practice.javapractice.entity.User;
 import com.haimov.naor.java.practice.javapractice.entity.UserRequest;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.annotation.ReadOnlyProperty;
 import org.springframework.web.bind.annotation.*;
 
-import java.sql.SQLException;
 import java.util.Optional;
 
 @RestController
@@ -53,7 +50,7 @@ public class Controller {
         try {
             userRepository.deleteById(id);
             return "Success";
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             return "Err! " + ex.getMessage();
         }
     }

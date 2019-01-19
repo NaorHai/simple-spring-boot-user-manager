@@ -1,7 +1,6 @@
 package com.haimov.naor.java.practice.javapractice.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -13,7 +12,6 @@ import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Objects;
 import java.util.UUID;
-
 
 
 @JsonSerialize()
