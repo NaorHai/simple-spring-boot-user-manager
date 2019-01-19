@@ -21,12 +21,14 @@ public class Controller {
     @GetMapping("/")
     public @ResponseBody
     Iterable<User> getAllUsers() {
+        System.out.println("Fetching all users...");
         return userRepository.findAll();
     }
 
     @GetMapping("/{id}")
     public @ResponseBody
     Optional<User> getUserById(@PathVariable String id) {
+        System.out.println("Fetching user: " + id);
         return userRepository.findById(id);
     }
 
@@ -41,7 +43,26 @@ public class Controller {
             user.setZip(userRequest.getZip());
             user.setPhone(userRequest.getPhone());
         }
+        System.out.println("Storing new user: " + user.toString());
         return userRepository.save(user);
+    }
+
+    @PostMapping("/update")
+    public @ResponseBody
+    User createUser(@RequestBody User obj) {
+     Optional<User> userToUpdate = userRepository.findById(obj.getId());
+     if (userToUpdate.isPresent()) {
+         User u = userToUpdate.get();
+         u.setName(obj.getName());
+         u.setPhone(obj.getPhone());
+         u.setZip(obj.getZip());
+         u.setDateOfBirth(obj.getDateOfBirth());
+         u.setCity(obj.getCity());
+         System.out.println("Updating user: " + u.toString());
+         return userRepository.save(u);
+     }
+        System.out.println("Storing new user: " + obj.toString());
+        return userRepository.save(obj);
     }
 
     @DeleteMapping("/{id}")
@@ -49,9 +70,10 @@ public class Controller {
     String deleteUser(@PathVariable String id) {
         try {
             userRepository.deleteById(id);
-            return "Success";
+            System.out.println("Deleted user: " + id);
+            return "success";
         } catch (Exception ex) {
-            return "Err! " + ex.getMessage();
+            return "ERROR! " + ex.getMessage();
         }
     }
 }
